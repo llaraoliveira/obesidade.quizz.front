@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { ArrowLeft, Heart, Apple, Activity, Brain } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { buildApiUrl, API_ENDPOINTS } from '@/config/api';
 
 export default function DicasPage() {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function DicasPage() {
   const loadDicassContent = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:3001/api/dicas');
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.DICAS));
       const data = await response.json();
       
       if (data.success) {

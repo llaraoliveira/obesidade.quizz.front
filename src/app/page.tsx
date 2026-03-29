@@ -3,6 +3,7 @@
 import { Play, Trophy, BookOpen, X, Filter } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { buildApiUrl, API_ENDPOINTS } from '@/config/api';
 
 interface GameResult {
   player_name: string;
@@ -28,7 +29,7 @@ export default function Home() {
   const loadResults = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:3001/api/results');
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.RESULTS));
       const data = await response.json();
       
       if (data.success) {

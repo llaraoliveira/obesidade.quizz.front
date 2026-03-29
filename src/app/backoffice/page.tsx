@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Menu, X, Plus, Edit, Trash2 } from 'lucide-react';
 import SideMenu, { ActionButton, IconButton } from '@/components/SideMenu';
+import { buildApiUrl, API_ENDPOINTS } from '@/config/api';
 
 interface User {
   id: number;
@@ -105,7 +106,7 @@ export default function BackofficePage() {
     if (!savedToken) return;
     
     try {
-      const response = await fetch('http://localhost:3001/api/backoffice/dashboard', {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.BACKOFFICE_DASHBOARD), {
         headers: {
           'Authorization': `Bearer ${savedToken}`
         }
@@ -128,7 +129,7 @@ export default function BackofficePage() {
     
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:3001/api/backoffice/results', {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.BACKOFFICE_RESULTS), {
         headers: {
           'Authorization': `Bearer ${savedToken}`
         }
@@ -151,7 +152,7 @@ export default function BackofficePage() {
     setError('');
     
     try {
-      const response = await fetch('http://localhost:3001/api/backoffice/login', {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.BACKOFFICE_LOGIN), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -191,7 +192,7 @@ export default function BackofficePage() {
     if (!savedToken) return;
     
     try {
-      const response = await fetch('http://localhost:3001/api/backoffice/questions', {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.BACKOFFICE_QUESTIONS), {
         headers: {
           'Authorization': `Bearer ${savedToken}`
         }
@@ -211,7 +212,7 @@ export default function BackofficePage() {
     if (!savedToken) return;
     
     try {
-      const response = await fetch('http://localhost:3001/api/backoffice/users', {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.BACKOFFICE_USERS), {
         headers: {
           'Authorization': `Bearer ${savedToken}`
         }
@@ -231,7 +232,7 @@ export default function BackofficePage() {
     if (!savedToken) return;
     
     try {
-      const response = await fetch('http://localhost:3001/api/backoffice/dicas', {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.BACKOFFICE_DICAS), {
         headers: {
           'Authorization': `Bearer ${savedToken}`
         }
@@ -256,7 +257,7 @@ export default function BackofficePage() {
     if (!savedToken) return;
     
     try {
-      const response = await fetch('http://localhost:3001/api/backoffice/dicas', {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.BACKOFFICE_DICAS), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -289,7 +290,7 @@ export default function BackofficePage() {
     if (!savedToken) return;
     
     try {
-      const response = await fetch('http://localhost:3001/api/backoffice/users', {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.BACKOFFICE_USERS), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -327,7 +328,7 @@ export default function BackofficePage() {
     if (!savedToken) return;
     
     try {
-      const response = await fetch(`http://localhost:3001/api/backoffice/users/${editingUser.id}`, {
+      const response = await fetch(buildApiUrl(`/api/backoffice/users/${editingUser.id}`), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -368,7 +369,7 @@ export default function BackofficePage() {
     if (!savedToken) return;
     
     try {
-      const response = await fetch(`http://localhost:3001/api/backoffice/users/${id}`, {
+      const response = await fetch(buildApiUrl(`/api/backoffice/users/${id}`), {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${savedToken}`
@@ -408,7 +409,7 @@ export default function BackofficePage() {
     if (!savedToken) return;
     
     try {
-      const response = await fetch('http://localhost:3001/api/backoffice/questions', {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.BACKOFFICE_QUESTIONS), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -454,7 +455,7 @@ export default function BackofficePage() {
     if (!savedToken) return;
     
     try {
-      const response = await fetch(`http://localhost:3001/api/backoffice/questions/${editingQuestion.id}`, {
+      const response = await fetch(buildApiUrl(`/api/backoffice/questions/${editingQuestion.id}`), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -494,7 +495,7 @@ export default function BackofficePage() {
     if (!savedToken) return;
     
     try {
-      const response = await fetch(`http://localhost:3001/api/backoffice/questions/${id}`, {
+      const response = await fetch(buildApiUrl(`/api/backoffice/questions/${id}`), {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${savedToken}`
@@ -556,7 +557,7 @@ export default function BackofficePage() {
     if (!savedToken) return;
     
     try {
-      const response = await fetch('http://localhost:3001/api/backoffice/results', {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.BACKOFFICE_RESULTS), {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${savedToken}`
@@ -589,7 +590,7 @@ export default function BackofficePage() {
     if (!savedToken) return;
     
     try {
-      const response = await fetch(`http://localhost:3001/api/backoffice/results/${id}`, {
+      const response = await fetch(buildApiUrl(`/api/backoffice/results/${id}`), {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${savedToken}`

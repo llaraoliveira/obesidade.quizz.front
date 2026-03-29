@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Clock, ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { buildApiUrl, API_ENDPOINTS } from '@/config/api';
 
 interface Question {
   id: number;
@@ -79,7 +80,7 @@ export default function GamePage() {
     setHardTotal(0);
     
     try {
-      const response = await fetch('http://localhost:3001/api/questions');
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.QUESTIONS));
       const data = await response.json();
       
       if (data.success) {
@@ -179,7 +180,7 @@ export default function GamePage() {
 
   const saveQuestionResponse = async (questionId: number, selectedAnswer: number, correctAnswer: number, isCorrect: boolean, difficulty: string) => {
     try {
-      await fetch('http://localhost:3001/api/question-responses', {
+      await fetch(buildApiUrl(API_ENDPOINTS.QUESTION_RESPONSES), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -283,7 +284,7 @@ export default function GamePage() {
     }
     
     try {
-      const response = await fetch('http://localhost:3001/api/test-difficulty', {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.TEST_DIFFICULTY), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -304,7 +305,7 @@ export default function GamePage() {
       
       if (!response.ok) {
         // Fallback sem os campos novos
-        const fallbackResponse = await fetch('http://localhost:3001/api/test-difficulty', {
+        const fallbackResponse = await fetch(buildApiUrl(API_ENDPOINTS.TEST_DIFFICULTY), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
