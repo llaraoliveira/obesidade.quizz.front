@@ -164,6 +164,7 @@ export default function BackofficePage() {
       
       if (data.success) {
         setIsLoggedIn(true);
+        setCurrentUser(data.user);
         localStorage.setItem('backoffice_token', data.token);
         localStorage.setItem('backoffice_user', JSON.stringify(data.user));
         loadDashboardData();
@@ -416,8 +417,7 @@ export default function BackofficePage() {
           'Authorization': `Bearer ${savedToken}`
         },
         body: JSON.stringify({
-          ...newQuestion,
-          alternatives: JSON.stringify(newQuestion.alternatives)
+          ...newQuestion
         })
       });
       
@@ -462,8 +462,7 @@ export default function BackofficePage() {
           'Authorization': `Bearer ${savedToken}`
         },
         body: JSON.stringify({
-          ...editingQuestion,
-          alternatives: JSON.stringify(editingQuestion.alternatives)
+          ...editingQuestion
         })
       });
       
@@ -1212,14 +1211,7 @@ export default function BackofficePage() {
                             <td className="px-4 sm:px-6 py-4 text-sm text-gray-900 max-w-xs truncate">{question.question}</td>
                             <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500">{question.difficulty}</td>
                             <td className="px-4 sm:px-6 py-4 text-sm text-gray-500 hidden sm:table-cell">
-                              {(() => {
-                                try {
-                                  const alternatives = JSON.parse(question.alternatives as string);
-                                  return Array.isArray(alternatives) ? alternatives.length : 0;
-                                } catch {
-                                  return 0;
-                                }
-                              })()} alternativas
+                              {getAlternatives(question).length} alternativas
                             </td>
                             <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                               <div className="flex gap-2">
